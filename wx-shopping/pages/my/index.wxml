@@ -1,0 +1,56 @@
+
+<view class="container">
+    <view class="weui-cells">
+        <view class="weui-cell">
+            <view class="weui-cell__hd head">
+                <image src="{{thumb}}" class="thumb"></image>
+            </view>
+            <view class="weui-cell__bd">
+               <text class="nickname">{{nickname}}</text>
+            </view>
+            <view class="weui-cell__ft">
+                <view class="qrCode">
+                    <image src="../../assets/icons/qrcode.png" />
+                </view>
+            </view>
+        </view>
+    </view>
+
+
+
+
+    <view class="weui-cells">
+        <navigator class="weui-cell weui-cell_access" hover-class="weui-cell_active" url="../orders/index" >
+            <view class="weui-cell__hd">
+                <image src="../../assets/icons/order.png" />
+            </view>
+            <view class="weui-cell__bd">我的订单</view>
+        </navigator>
+        <navigator class="weui-cell weui-cell_access" hover-class="weui-cell_active" url="../addr/index">
+            <view class="weui-cell__hd">
+                <image src="../../assets/icons/addr.png" />
+            </view>
+            <view class="weui-cell__bd" >我的收货地址</view>
+        </navigator>
+        <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" url="/pages/account/account" bindtap="unFinished">
+            <view class="weui-cell__hd">
+                <image src="../../assets/icons/coupon.png" />
+            </view>
+            <view class="weui-cell__bd">我的优惠券</view>
+        </view>
+        <view url="/pages/electric/electric" class="weui-cell weui-cell_access" hover-class="weui-cell_active" bindtap="unFinished">
+            <view class="weui-cell__hd">
+                <image src="../../assets/icons/fcode.png" />
+            </view>
+            <view class="weui-cell__bd">我的F码</view>
+        </view>
+    </view>
+    <view class="weui-cells">
+        <view url="/pages/catalog/catalog" class="weui-cell weui-cell_access" hover-class="weui-cell_active" bindtap="unFinished">
+            <view class="weui-cell__hd">
+                <image src="../../assets/icons/setting.png" />
+            </view>
+            <view class="weui-cell__bd">设置</view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,137 @@
+<view class="section section-swiper">
+    <swiper class="slide" bindchange="changeSwiper" circular="true">
+        <block wx:for="{{goods.goods_slides}}" wx:key="{{index}}">
+            <swiper-item>
+                <image src="{{item.goods_url}}" mode="widthFix" class="slide-image" data-id="{{item.id}}" bindtap="previewImage"/>
+            </swiper-item>
+        </block>
+    </swiper>
+    <view class="img_text">{{current}}/{{goods.goods_slides.length}}</view>
+
+    <view class="overview">
+        <view class="goods-price">{{goods.price}}</view>
+        <view class="goods-desc">{{goods.desc}}</view>
+        <view class="goods-line">
+            <text class="goods-fee">运费: 免运费</text>
+            <text class="goods-month">月销量177</text>
+            <text class="goods-domoin">广东广州</text>
+        </view>
+    </view>
+    <view class="weui-cells weui-cells_after-title pdt_select">
+        <view class="weui-cell weui-cell_access model" hover-class="weui-cell_active" bindtap="actionSheet">
+            <view class="weui-cell__bd">{{model?model:'请选择规格属性'}}{{modNum}}</view>
+            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </view>
+        <view class="weui-cell weui-cell_access pdt_server" hover-class="weui-cell_active" bindtap="actionSer">
+            <view class="weui-cell__bd left">服务：</view>
+            <view class="weui-cell__ft weui-cell__ft_in-access right">
+                <block wx:for="{{server}}" wx:key="{{index}}">
+                    <view class="server_box">
+                        <text class="server">{{item.tit}}</text>
+                    </view>
+                </block>
+            </view>
+        </view>
+        <view class="weui-cell weui-cell_access comment" hover-class="weui-cell_active" url="">
+            <view class="weui-cell__bd text">用户评价(73137)</view>
+            <view class="weui-cell__ft  weui-cell__ft_in-access comment_rt">98.3%好评</view>
+        </view>
+    </view>
+    <view class="rec">
+        <view class="rec_tt">
+            <view class="cate_list" data-index="0" bindtap="switchCategory">
+                <text class="{{curIndex==0?'on':''}}">大家都在看</text>
+            </view>
+            <view class="cate_list" data-index="1" bindtap="switchCategory">
+                <text class="{{curIndex==1?'on':''}}">24小时热销</text>
+            </view>
+        </view>
+        <scroll-view wx:if="{{showRecommend}}" class="cate_box" scroll-x scroll-with-animation="true">
+            <block wx:for="{{recommend}}" wx:key="{{index}}">
+                <navigator class="recommend" hover-class="none" url="/pages/goods-detail/index">
+                    <image class="recommend_img" src="{{item.banner}}"></image>
+                    <view class="recommend_tt">{{item.title}}</view>
+                    <view class="recommend_pc">{{item.price}}</view>
+                </navigator>
+            </block>
+        </scroll-view>
+        <scroll-view wx:else class="cate_box" scroll-x scroll-with-animation="true">
+            <block wx:for="{{hotSale}}" wx:key="{{index}}">
+                <navigator class="recommend" hover-class="none" url="/pages/goods-detail/index">
+                    <image class="recommend_img" src="{{item.banner}}"></image>
+                    <view class="recommend_tt">{{item.title}}</view>
+                    <view class="recommend_pc">{{item.price}}</view>
+                </navigator>
+            </block>
+        </scroll-view>
+    </view>
+    <view class="information">
+        <view class="baby-info">宝贝详情</view>
+        <block  class="baby-image" wx:for="{{goods_information}}" wx:key="{{index}}">
+            <image src="{{item.information_url}}"class="baby-image" />
+        </block>
+    </view>
+    <view class="foo_buycar">
+         <navigator hover-class="none" open-type="switchTab" url="/pages/index/index">
+            <image src="/lib/images/home.png"></image>
+        </navigator> 
+        <navigator hover-class="none" url="">
+            <image src="/lib/images/kefu.png"></image>
+        </navigator>
+        <view class="car_img" bindtap="goCar">
+            <image src="/lib/images/buycar.png">
+                <text class="carNum {{carNum?'':'hide'}}">{{carNum}}</text>
+            </image>
+        </view>
+        
+        <view class="navbuy" bindtap="goBuy">立即购买</view>
+        <view class="addcar" bindtap="addCar" form-type="submit" loading="true">加入购物车</view>
+    </view>
+</view>
+
+
+
+
+
+
+
+<view class="actionbgc {{hide?'hide':''}}" bindtap="upactionSheet"></view>
+<scroll-view scroll-y class="actionsheet {{hide?'':'show'}}">
+    <image src="/lib/images/cancel.png" class="actcancel" bindtap="upactionSheet"></image>
+    <view class="action_hd" >
+        <image class="modImg" src="{{image}}"></image>
+        <view class="modText">
+            <view class="modPrice">价格￥69</view>
+            <view class="modSel">{{model}}</view>
+        </view>
+    </view>
+    <view class="action_bd">
+        <view class="tt">颜色</view>
+        <view class="con">
+            <radio-group class="weui-flex" bindchange="bindAmountChange">
+                <label wx:for="{{amounts}}" wx:key="{{index}}">
+                    <radio class="weui-check" value="{{item.value}}"></radio>
+                    <view class="weui-check__label {{item.checked?'checked':''}}">
+                        <text>{{item.value}}</text>
+                    </view>
+                </label>
+            </radio-group>
+        </view>
+        <view class="tt">数量</view>
+        <view class="con">
+            <view class="drop" bindtap="dropNum">-</view>
+            <view class="num">{{num}}</view>
+            <view class="add" bindtap="addNum">+</view>
+        </view>
+    </view>
+</scroll-view>
+<view class="actionbgc {{serHide?'hide':''}}" bindtap="upactionSer"></view>
+<view class="actionsheet actser {{serHide?'':'show'}}">
+    <view class="server_tit">服务</view>
+    <scroll-view scroll-y class="scroll_server">
+        <view class="server_content" wx:for="{{server}}" wx:key="{{index}}">
+            <view class="server content_tt">{{item.tit}}</view>
+            <view class="content_se">{{item.content}}</view>
+        </view>
+    </scroll-view>
+</view>
